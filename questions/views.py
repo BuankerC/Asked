@@ -5,7 +5,19 @@ from .models import Question
 
 
 def index(request):
-    return render(request, 'index.html')
+    questions = Question.objects.all()
+    context = {
+        'questions': questions,
+    }
+    return render(request, 'index.html', context)
+
+
+def detail(request, id):
+    question = Question.objects.get(id=id)
+    context = {
+        'question': question,
+    }
+    return render(request, 'detail.html', context)
 
 
 def create(request):
